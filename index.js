@@ -82,16 +82,21 @@ app.post('/', (req, res) => {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityNm}&appid=${apiKey}&units=metric`;
 
-  if (url) {
 
-    https.get(url, (response) => {
 
-      response.on('data', (data) => {
+  https.get(url, (response) => {
 
-        const myWeatherData = JSON.parse(data);
+    response.on('data', (data) => {
 
-        const temperature = myWeatherData.main.temp;
-        // console.log("Current Temperature is " + temperature);
+      const myWeatherData = JSON.parse(data);
+
+      const temperature = myWeatherData.main.temp;
+      // console.log("Current Temperature is " + temperature);
+
+
+      if (temperature) {
+
+
 
         const description = myWeatherData.weather[0].description;
         // console.log("Description is " + description);
@@ -99,14 +104,20 @@ app.post('/', (req, res) => {
 
 
         res.send(`<h1 style="color:blue">The temperature in ${cityNm} is ${temperature} degree celcius</h1> <br> The description is ${description} <br><br> Go back to search again.<br><br><br> Thanks By Gaurav`);
-      })
+
+
+      }
+      else {
+        res.send("Please enter valid city name ");
+      }
 
     })
 
-  }
-  else {
-    res.send("Please enter valid city name ");
-  }
+
+
+  })
+
+
 
   // })
 
