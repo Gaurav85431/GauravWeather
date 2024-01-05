@@ -71,8 +71,12 @@ app.post('/', (req, res) => {
 
   try {
 
-
-    const cityNm = req.body.cityName;
+    try {
+      const cityNm = req.body.cityName;
+    }
+    catch (error) {
+      res.send("Please enter valid city name ")
+    }
 
 
     const apiKey = '7b26c1d85384b6edd09de4ad9c3f411e';
@@ -87,14 +91,14 @@ app.post('/', (req, res) => {
         const myWeatherData = JSON.parse(data);
 
         const temperature = myWeatherData.main.temp;
-        console.log("Current Temperature is " + temperature);
+        // console.log("Current Temperature is " + temperature);
 
         const description = myWeatherData.weather[0].description;
-        console.log("Description is " + description);
+        // console.log("Description is " + description);
 
 
 
-        res.send(`<h1 style="color:blue">The temperature in ${cityNm} is ${temperature} degree celcius</h1> <br> The description is ${description}`);
+        res.send(`<h1 style="color:blue">The temperature in ${cityNm} is ${temperature} degree celcius</h1> <br> The description is ${description} <br><br> Go back to search again.<br><br><br> Thanks By Gaurav`);
 
 
       })
@@ -114,5 +118,5 @@ app.post('/', (req, res) => {
 })
 
 app.listen(3000, function () {
-  console.log("Server is ready"); // console
+  // console.log("Server is ready"); // console
 })
