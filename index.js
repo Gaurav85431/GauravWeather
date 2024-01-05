@@ -90,11 +90,13 @@ app.post('/', (req, res) => {
 
       const myWeatherData = JSON.parse(data);
 
-      const temperature = myWeatherData.main.temp;
-      // console.log("Current Temperature is " + temperature);
+      if (myWeatherData) {
+
+        const temperature = myWeatherData.main.temp;
+        // console.log("Current Temperature is " + temperature);
 
 
-      if (temperature) {
+
 
 
 
@@ -103,7 +105,7 @@ app.post('/', (req, res) => {
 
 
 
-        res.send(`<h1 style="color:blue">The temperature in ${cityNm} is ${temperature} degree celcius</h1> <br> The description is ${description} <br><br> Go back to search again.<br><br><br> Thanks By Gaurav`);
+        res.send(`<h1 style="color:blue">The temperature in ${cityNm} is ${temperature} degree celcius</h1> <br> The description is ${description} <br><br> <a herf='https://gauravweather.onrender.com/'>Go back</a> to search again.<br><br><br> Thanks By Gaurav`);
 
 
       }
