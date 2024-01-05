@@ -69,20 +69,20 @@ app.post('/', (req, res) => {
 
   //--
 
-  try {
-
-    try {
-      const cityNm = req.body.cityName;
-    }
-    catch (error) {
-      res.send("Please enter valid city name ")
-    }
 
 
-    const apiKey = '7b26c1d85384b6edd09de4ad9c3f411e';
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityNm}&appid=${apiKey}&units=metric`;
+  const cityNm = req.body.cityName;
 
+
+
+
+
+  const apiKey = '7b26c1d85384b6edd09de4ad9c3f411e';
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityNm}&appid=${apiKey}&units=metric`;
+
+  if (url) {
 
     https.get(url, (response) => {
 
@@ -99,18 +99,21 @@ app.post('/', (req, res) => {
 
 
         res.send(`<h1 style="color:blue">The temperature in ${cityNm} is ${temperature} degree celcius</h1> <br> The description is ${description} <br><br> Go back to search again.<br><br><br> Thanks By Gaurav`);
-
-
       })
 
-
-
-
     })
+
   }
-  catch (error) {
-    res.send("<h2> Please enter a valid city");
+  else {
+    res.send("Please enter valid city name ");
   }
+
+  // })
+
+
+
+
+
 
 
 
